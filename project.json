@@ -1,0 +1,11 @@
+{
+  "Name": "go-project",
+  "Username": "autonomy",
+  "Type": [
+    "binary",
+    "library"
+  ],
+  "License": [
+    "Mozilla Public License Version 2.0"
+  ]
+}
