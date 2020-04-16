@@ -3,7 +3,7 @@
 Download this template:
 
 ```bash
-boilr template save talos-systems/template-go template-go
+boilr template download talos-systems/template-go template-go
 ```
 
 Create a new project:
