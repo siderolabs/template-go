@@ -3,12 +3,12 @@
 # The base target provides the base for running various tasks against the source
 # code.
 
-FROM golang:1.13 AS base
+FROM golang:1.14 AS base
 ENV GO111MODULE on
 ENV GOPROXY https://proxy.golang.org
 ENV CGO_ENABLED 0
 WORKDIR /tmp
-RUN curl -sfL https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | bash -s -- -b /go/bin v1.23.3
+RUN curl -sfL https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | bash -s -- -b /go/bin v1.24.0
 RUN cd $(mktemp -d) \
   && go mod init tmp \
   && go get mvdan.cc/gofumpt/gofumports
@@ -67,7 +67,7 @@ RUN markdownlint --rules /node_modules/sentences-per-line/index.js .
 # The container target builds the container image.
 
 FROM base AS binary
-RUN --mount=type=cache,target=/root/.cache/go-build GOOS=linux go build -ldflags "-s -w" -o /{{ Name }}
+RUN --mount=type=cache,target=/root/.cache/go-build GOOS=linux go build -ldflags "-s -w" -o /{{ Name }} ./cmd/...
 RUN chmod +x /{{ Name }}
 
 FROM scratch AS container
